@@ -63,32 +63,32 @@ def alligator(
     lips_displacement = 3
 
     # Shift the SMMA values based on displacements
-    #gator_jaw_shifted = [None] * jaw_displacement + gator_jaw[:-jaw_displacement]
-    #gator_teeth_shifted = [None] * teeth_displacement + gator_teeth[:-teeth_displacement]
-    #gator_lips_shifted = [None] * lips_displacement + gator_lips[:-lips_displacement]
+    gator_jaw_shifted = [None] * jaw_displacement + gator_jaw[:-jaw_displacement]
+    gator_teeth_shifted = [None] * teeth_displacement + gator_teeth[:-teeth_displacement]
+    gator_lips_shifted = [None] * lips_displacement + gator_lips[:-lips_displacement]
 
     # Offset
-    if offset != 0:
-        gator_jaw = gator_jaw.shift(offset)
-        gator_teeth = gator_teeth.shift(offset)
-        gator_lips = gator_lips.shift(offset)
+    #if offset != 0:
+        #gator_jaw = gator_jaw.shift(offset)
+        #gator_teeth = gator_teeth.shift(offset)
+        #gator_lips = gator_lips.shift(offset)
 
     # Fill
     if "fillna" in kwargs:
-        gator_jaw.fillna(kwargs["fillna"], inplace=True)
-        gator_teeth.fillna(kwargs["fillna"], inplace=True)
-        gator_lips.fillna(kwargs["fillna"], inplace=True)
+        gator_jaw_shifted.fillna(kwargs["fillna"], inplace=True)
+        gator_teeth_shifted.fillna(kwargs["fillna"], inplace=True)
+        gator_lips_shifted.fillna(kwargs["fillna"], inplace=True)
     if "fill_method" in kwargs:
-        gator_jaw.fillna(method=kwargs["fill_method"], inplace=True)
-        gator_teeth.fillna(method=kwargs["fill_method"], inplace=True)
-        gator_lips.fillna(method=kwargs["fill_method"], inplace=True)
+        gator_jaw_shifted.fillna(method=kwargs["fill_method"], inplace=True)
+        gator_teeth_shifted.fillna(method=kwargs["fill_method"], inplace=True)
+        gator_lips_shifted.fillna(method=kwargs["fill_method"], inplace=True)
 
     # Name and Category
     _props = f"_{jaw}_{teeth}_{lips}"
     data = {
-        f"AGj{_props}": gator_jaw,
-        f"AGt{_props}": gator_teeth,
-        f"AGl{_props}": gator_lips
+        f"AGj{_props}": gator_jaw_shifted,
+        f"AGt{_props}": gator_teeth_shifted,
+        f"AGl{_props}": gator_lips_shifted
     }
     df = DataFrame(data, index=close.index)
 
