@@ -58,6 +58,15 @@ def alligator(
     gator_teeth = smma(close, length=teeth, talib=mode_tal)
     gator_lips = smma(close, length=lips, talib=mode_tal)
 
+    jaw_displacement = 8
+    teeth_displacement = 5
+    lips_displacement = 3
+
+    # Shift the SMMA values based on displacements
+    gator_jaw_shifted = [None] * jaw_displacement + gator_jaw[:-jaw_displacement]
+    gator_teeth_shifted = [None] * teeth_displacement + gator_teeth[:-teeth_displacement]
+    gator_lips_shifted = [None] * lips_displacement + gator_lips[:-lips_displacement]
+
     # Offset
     if offset != 0:
         gator_jaw = gator_jaw.shift(offset)
@@ -77,9 +86,9 @@ def alligator(
     # Name and Category
     _props = f"_{jaw}_{teeth}_{lips}"
     data = {
-        f"AGj{_props}": gator_jaw,
-        f"AGt{_props}": gator_teeth,
-        f"AGl{_props}": gator_lips
+        f"AGj{_props}": gator_jaw_shifted,
+        f"AGt{_props}": gator_teeth_shifted,
+        f"AGl{_props}": gator_lips_shifted
     }
     df = DataFrame(data, index=close.index)
 
