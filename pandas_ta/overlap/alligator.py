@@ -58,6 +58,22 @@ def alligator(
     gator_teeth = smma(close, length=teeth, talib=mode_tal)
     gator_lips = smma(close, length=lips, talib=mode_tal)
 
+    # Offset
+    if offset != 0:
+        gator_jaw = gator_jaw.shift(offset)
+        gator_teeth = gator_teeth.shift(offset)
+        gator_lips = gator_lips.shift(offset)
+
+    # Fill
+    if "fillna" in kwargs:
+        gator_jaw.fillna(kwargs["fillna"], inplace=True)
+        gator_teeth.fillna(kwargs["fillna"], inplace=True)
+        gator_lips.fillna(kwargs["fillna"], inplace=True)
+    if "fill_method" in kwargs:
+        gator_jaw.fillna(method=kwargs["fill_method"], inplace=True)
+        gator_teeth.fillna(method=kwargs["fill_method"], inplace=True)
+        gator_lips.fillna(method=kwargs["fill_method"], inplace=True)
+
     jaw_displacement = 8
     teeth_displacement = 5
     lips_displacement = 3
@@ -66,22 +82,6 @@ def alligator(
     gator_jaw_shifted = [None] * jaw_displacement + gator_jaw[:-jaw_displacement]
     gator_teeth_shifted = [None] * teeth_displacement + gator_teeth[:-teeth_displacement]
     gator_lips_shifted = [None] * lips_displacement + gator_lips[:-lips_displacement]
-
-    # Offset
-    #if offset != 0:
-        #gator_jaw = gator_jaw.shift(offset)
-        #gator_teeth = gator_teeth.shift(offset)
-        #gator_lips = gator_lips.shift(offset)
-
-    # Fill
-    if "fillna" in kwargs:
-        gator_jaw_shifted.fillna(kwargs["fillna"], inplace=True)
-        gator_teeth_shifted.fillna(kwargs["fillna"], inplace=True)
-        gator_lips_shifted.fillna(kwargs["fillna"], inplace=True)
-    if "fill_method" in kwargs:
-        gator_jaw_shifted.fillna(method=kwargs["fill_method"], inplace=True)
-        gator_teeth_shifted.fillna(method=kwargs["fill_method"], inplace=True)
-        gator_lips_shifted.fillna(method=kwargs["fill_method"], inplace=True)
 
     # Name and Category
     _props = f"_{jaw}_{teeth}_{lips}"
