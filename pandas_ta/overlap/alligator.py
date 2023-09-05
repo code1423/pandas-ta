@@ -63,9 +63,9 @@ def alligator(
     lips_displacement = 3
 
     # Shift the SMMA values based on displacements
-    gator_jaw_shifted = [None] * jaw_displacement + gator_jaw[:-jaw_displacement]
-    gator_teeth_shifted = [None] * teeth_displacement + gator_teeth[:-teeth_displacement]
-    gator_lips_shifted = [None] * lips_displacement + gator_lips[:-lips_displacement]
+    #gator_jaw_shifted = [None] * jaw_displacement + gator_jaw[:-jaw_displacement]
+    #gator_teeth_shifted = [None] * teeth_displacement + gator_teeth[:-teeth_displacement]
+    #gator_lips_shifted = [None] * lips_displacement + gator_lips[:-lips_displacement]
 
     # Offset
     if offset != 0:
