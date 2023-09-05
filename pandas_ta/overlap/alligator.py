@@ -86,9 +86,9 @@ def alligator(
     # Name and Category
     _props = f"_{jaw}_{teeth}_{lips}"
     data = {
-        f"AGj{_props}": gator_jaw_shifted,
-        f"AGt{_props}": gator_teeth_shifted,
-        f"AGl{_props}": gator_lips_shifted
+        f"AGj{_props}": gator_jaw,
+        f"AGt{_props}": gator_teeth,
+        f"AGl{_props}": gator_lips
     }
     df = DataFrame(data, index=close.index)
 
